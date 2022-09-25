@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         # Performs all actions on different versions of Python
-        python-version: [3.9]
+        python-version: ["3.10"]
     # Define the workflow steps
     steps:
     # Checkout the code of the repository
@@ -37,17 +37,6 @@ jobs:
           uses: actions/setup-python@v1
           with:
             python-version: ${{ matrix.python-version }}
-        # Setup Java
-        - name: Set up JDK 1.8
-          if: always()
-          uses: actions/setup-java@v1
-          with:
-            java-version: 1.8
-        # Check for existence of gradle files
-        - name: Check for Existence of Files
-          uses: andstor/file-existence-action@v1
-          with:
-            files: "build.gradle, gradle.properties, settings.gradle, gatorgrader.yml"
         # Install pip
         - name: Install Pip
           if: always()
@@ -96,13 +85,9 @@ jobs:
           run: |
             cd datasummarizer
             poetry run task mypy
-        # Determine the version of Gradle
-        - name: Determine Gradle Version
-          if: always()
-          run: |
-            gradle --version
-        # Run GatorGrader: see config/gatorgrader.yml
-        - name: Run GatorGrader
+        # Run GatorGrader: see config/gatorgrade.yml
+        - name: Run GatorGrader with GatorGrade
           if: always()
           run:  |
-            gradle grade
+            pip install gatorgrade
+            gatorgrade --config config/gatorgrade.yml
