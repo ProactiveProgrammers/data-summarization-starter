@@ -2,7 +2,7 @@
 
 # TODO: import the Path object from the pathlib module
 
-# TODO: import the type module
+# TODO: import the typer module
 
 # TODO: import the summarize module from datasummarizer
 
