@@ -204,7 +204,7 @@ setup: |
 
 # --> check that the number of commits in the Git repository is beyond a threshold
 # count number of commits in the GitHub repository
-- description: Have at least a specific minimum number of commits (5) in repository
+- description: Have at least a specific minimum number of commits in repository
   check: CountCommits
   options:
     count: 10
